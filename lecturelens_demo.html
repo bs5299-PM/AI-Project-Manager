@@ -1,0 +1,374 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: var(--color-background-primary);
+    --bg2: var(--color-background-secondary);
+    --bg3: var(--color-background-tertiary);
+    --txt: var(--color-text-primary);
+    --txt2: var(--color-text-secondary);
+    --txt3: var(--color-text-tertiary);
+    --border: var(--color-border-tertiary);
+    --border2: var(--color-border-secondary);
+    --radius: var(--border-radius-md);
+    --radiuslg: var(--border-radius-lg);
+    --red50: #FCEBEB; --red600: #A32D2D; --red800: #791F1F;
+    --blue50: #E6F1FB; --blue600: #185FA5; --blue800: #0C447C;
+    --teal50: #E1F5EE; --teal600: #0F6E56; --teal800: #085041;
+    --amber50: #FAEEDA; --amber600: #854F0B;
+    --green50: #EAF3DE; --green600: #3B6D11; --green800: #27500A;
+  }
+  body { font-family: var(--font-sans); background: transparent; color: var(--txt); }
+
+  .screen { display: none; animation: fadeIn 0.3s ease; }
+  .screen.active { display: flex; flex-direction: column; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .app-shell { min-height: 620px; border: 0.5px solid var(--border); border-radius: var(--radiuslg); overflow: hidden; background: var(--bg); }
+
+  .topbar { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 0.5px solid var(--border); background: var(--bg); }
+  .logo { font-size: 15px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+  .logo-dot { width: 8px; height: 8px; border-radius: 50%; background: #E24B4A; animation: pulse 1.8s infinite; }
+  @keyframes pulse { 0%,100% { opacity:1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+  .logo-dot.off { background: var(--border2); animation: none; }
+  .nav-steps { display: flex; gap: 4px; }
+  .nav-step { font-size: 12px; color: var(--txt3); padding: 4px 10px; border-radius: var(--radius); cursor: default; }
+  .nav-step.active { background: var(--bg2); color: var(--txt); font-weight: 500; }
+
+  .screen-body { flex: 1; padding: 28px 24px; }
+
+  .hero-title { font-size: 26px; font-weight: 500; margin-bottom: 8px; line-height: 1.3; }
+  .hero-sub { font-size: 14px; color: var(--txt2); margin-bottom: 32px; max-width: 480px; }
+
+  .start-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--txt); color: var(--bg); border: none; border-radius: var(--radius); padding: 13px 24px; font-size: 15px; font-weight: 500; cursor: pointer; font-family: var(--font-sans); transition: opacity 0.15s; margin-bottom: 16px; }
+  .start-btn:hover { opacity: 0.85; }
+
+  .upload-zone { border: 0.5px dashed var(--border2); border-radius: var(--radiuslg); padding: 16px 20px; display: flex; align-items: center; gap: 12px; cursor: pointer; max-width: 420px; transition: background 0.15s; margin-bottom: 24px; }
+  .upload-zone:hover { background: var(--bg2); }
+  .upload-icon { font-size: 20px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: var(--bg2); border-radius: var(--radius); flex-shrink: 0; }
+  .upload-label { font-size: 13px; color: var(--txt2); }
+  .upload-label span { display: block; font-size: 12px; color: var(--txt3); margin-top: 2px; }
+
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; max-width: 520px; }
+  .info-card { background: var(--bg2); border-radius: var(--radius); padding: 14px 16px; }
+  .info-card .num { font-size: 22px; font-weight: 500; margin-bottom: 2px; }
+  .info-card .lbl { font-size: 12px; color: var(--txt2); }
+
+  .live-split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; height: 480px; }
+  .panel { border: 0.5px solid var(--border); border-radius: var(--radiuslg); display: flex; flex-direction: column; overflow: hidden; }
+  .panel-header { padding: 12px 16px; border-bottom: 0.5px solid var(--border); font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .panel-body { flex: 1; overflow-y: auto; padding: 14px 16px; scroll-behavior: smooth; }
+  .panel-body::-webkit-scrollbar { width: 4px; }
+  .panel-body::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+  .transcript-line { font-size: 13px; line-height: 1.7; color: var(--txt2); margin-bottom: 6px; }
+  .transcript-line .word { display: inline; }
+  .transcript-line.current { color: var(--txt); }
+  .highlight { background: #FAEEDA; color: #633806; border-radius: 3px; padding: 0 2px; }
+  @media (prefers-color-scheme: dark) { .highlight { background: #412402; color: #FAC775; } }
+
+  .sidebar-item { border-radius: var(--radius); padding: 11px 13px; margin-bottom: 8px; animation: slideIn 0.4s cubic-bezier(0.16,1,0.3,1); font-size: 13px; line-height: 1.5; }
+  @keyframes slideIn { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: translateX(0); } }
+  .sidebar-item.action { background: var(--red50); border-left: 3px solid #E24B4A; }
+  .sidebar-item.concept { background: var(--blue50); border-left: 3px solid #378ADD; }
+  .sidebar-item .tag { font-size: 11px; font-weight: 500; margin-bottom: 4px; display: flex; align-items: center; gap: 5px; }
+  .sidebar-item.action .tag { color: var(--red800); }
+  .sidebar-item.concept .tag { color: var(--blue800); }
+  .sidebar-item .item-text { color: var(--txt); }
+  .sidebar-item .source-quote { font-size: 11px; color: var(--txt3); margin-top: 5px; border-top: 0.5px solid rgba(0,0,0,0.06); padding-top: 4px; }
+  .tag-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .tag-dot.red { background: #E24B4A; }
+  .tag-dot.blue { background: #378ADD; }
+
+  .rec-indicator { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--txt3); }
+  .rec-dot { width: 7px; height: 7px; border-radius: 50%; background: #E24B4A; animation: pulse 1.2s infinite; }
+
+  .confidence-bar { height: 3px; background: var(--border); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+  .confidence-fill { height: 100%; border-radius: 2px; transition: width 0.8s ease; }
+  .sidebar-item.action .confidence-fill { background: #E24B4A; }
+  .sidebar-item.concept .confidence-fill { background: #378ADD; }
+
+  .end-btn { margin: 16px; padding: 10px 18px; border: 0.5px solid var(--border2); border-radius: var(--radius); background: transparent; font-size: 13px; cursor: pointer; color: var(--txt); font-family: var(--font-sans); transition: background 0.15s; }
+  .end-btn:hover { background: var(--bg2); }
+
+  .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+  .sum-panel { border: 0.5px solid var(--border); border-radius: var(--radiuslg); overflow: hidden; }
+  .sum-panel .sum-header { padding: 10px 14px; border-bottom: 0.5px solid var(--border); font-size: 12px; font-weight: 500; color: var(--txt2); display: flex; align-items: center; gap: 6px; }
+  .sum-panel .sum-body { padding: 12px 14px; }
+  .sum-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: 13px; line-height: 1.5; }
+  .sum-item:last-child { margin-bottom: 0; }
+  .sum-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .sum-dot.red { background: #E24B4A; }
+  .sum-dot.blue { background: #378ADD; }
+
+  .export-row { display: flex; gap: 8px; }
+  .export-btn { flex: 1; padding: 10px; border: 0.5px solid var(--border2); border-radius: var(--radius); background: transparent; font-size: 13px; cursor: pointer; font-family: var(--font-sans); color: var(--txt); transition: background 0.15s; text-align: center; }
+  .export-btn:hover { background: var(--bg2); }
+  .export-btn.primary { background: var(--txt); color: var(--bg); border-color: var(--txt); }
+  .export-btn.primary:hover { opacity: 0.85; }
+
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 20px; }
+  .stat-box { background: var(--bg2); border-radius: var(--radius); padding: 12px 14px; }
+  .stat-num { font-size: 20px; font-weight: 500; }
+  .stat-lbl { font-size: 11px; color: var(--txt2); margin-top: 2px; }
+  .stat-num.red { color: #A32D2D; }
+  .stat-num.blue { color: #185FA5; }
+  .stat-num.green { color: #3B6D11; }
+
+  .transcript-full { border: 0.5px solid var(--border); border-radius: var(--radiuslg); padding: 16px; font-size: 13px; line-height: 1.8; color: var(--txt2); max-height: 120px; overflow-y: auto; margin-bottom: 16px; }
+  .transcript-full::-webkit-scrollbar { width: 4px; }
+  .transcript-full::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+  .section-label { font-size: 11px; font-weight: 500; color: var(--txt3); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px; }
+</style>
+
+<h2 class="sr-only">LectureLens interactive product demo — 4-screen walkthrough of session start, live lecture view, and session summary</h2>
+
+<div class="app-shell">
+  <div class="topbar">
+    <div class="logo">
+      <div class="logo-dot off" id="recDot"></div>
+      LectureLens
+    </div>
+    <div class="nav-steps">
+      <div class="nav-step active" id="step1">Start</div>
+      <div class="nav-step" id="step2">Live</div>
+      <div class="nav-step" id="step3">Summary</div>
+    </div>
+  </div>
+
+  <div id="screen1" class="screen active screen-body">
+    <div class="hero-title">Your AI attention layer<br>for live lectures</div>
+    <div class="hero-sub">LectureLens listens, extracts Action Items and Key Concepts in real time, and surfaces what matters — while the lecture is still happening.</div>
+
+    <button class="start-btn" onclick="startSession()">
+      <span style="width:10px;height:10px;border-radius:50%;background:#ef4444;display:inline-block;"></span>
+      Start session
+    </button>
+
+    <div class="upload-zone">
+      <div class="upload-icon">📄</div>
+      <div class="upload-label">
+        Upload syllabus (optional)
+        <span>Helps AI classify topics — PDF, DOCX up to 10MB</span>
+      </div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="num">~3s</div>
+        <div class="lbl">AI sidebar update latency</div>
+      </div>
+      <div class="info-card">
+        <div class="num">85%+</div>
+        <div class="lbl">extraction accuracy</div>
+      </div>
+      <div class="info-card">
+        <div class="num">0</div>
+        <div class="lbl">typing required</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="screen2" class="screen" style="flex-direction: column; height: 100%;">
+    <div style="padding: 10px 16px 0;">
+      <div class="live-split" id="liveSplit">
+        <div class="panel">
+          <div class="panel-header">
+            <div class="rec-indicator">
+              <div class="rec-dot"></div>
+              Live transcript
+            </div>
+            <span style="margin-left: auto; font-size: 11px; color: var(--txt3);" id="timeCounter">0:00</span>
+          </div>
+          <div class="panel-body" id="transcriptBody"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            AI sidebar
+            <span style="margin-left: auto; font-size: 11px; color: var(--txt3);" id="itemCount">0 items</span>
+          </div>
+          <div class="panel-body" id="sidebarBody"></div>
+        </div>
+      </div>
+    </div>
+    <div style="padding: 8px 16px 14px; display: flex; align-items: center; justify-content: space-between;">
+      <div style="font-size: 12px; color: var(--txt3);">Neural Networks — CS 301 · Prof. Chen</div>
+      <button class="end-btn" onclick="endSession()">End session</button>
+    </div>
+  </div>
+
+  <div id="screen3" class="screen screen-body" style="padding-top: 20px;">
+    <div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom: 16px;">
+      <div style="font-size: 17px; font-weight: 500;">Session summary</div>
+      <div style="font-size: 12px; color: var(--txt3);">CS 301 · Neural Networks · 8 min</div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-num red" id="finalActions">0</div><div class="stat-lbl">Action items</div></div>
+      <div class="stat-box"><div class="stat-num blue" id="finalConcepts">0</div><div class="stat-lbl">Key concepts</div></div>
+      <div class="stat-box"><div class="stat-num green">85%</div><div class="stat-lbl">Est. accuracy</div></div>
+      <div class="stat-box"><div class="stat-num">8 min</div><div class="stat-lbl">Session length</div></div>
+    </div>
+
+    <div class="section-label">Full transcript</div>
+    <div class="transcript-full" id="fullTranscript"></div>
+
+    <div class="summary-grid" id="summaryGrid"></div>
+
+    <div class="export-row">
+      <button class="export-btn primary">Export PDF</button>
+      <button class="export-btn">Markdown</button>
+      <button class="export-btn">Notion</button>
+      <button class="export-btn" onclick="restart()">New session</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const lectureData = [
+  { text: "Good morning everyone. Today we'll cover neural networks — one of the most important topics this semester.", delay: 0 },
+  { text: "A neural network is a computational model inspired by the structure of biological neurons in the brain.", delay: 3500 },
+  { text: "The key concept here is the perceptron — the fundamental building block of any neural network.", delay: 7000 },
+  { text: "Each perceptron takes a set of inputs, applies weights, sums them, and passes the result through an activation function.", delay: 10500 },
+  { text: "The activation function — sigmoid, ReLU, or tanh — determines whether a neuron fires.", delay: 14000 },
+  { text: "Now, how do networks actually learn? This is where backpropagation comes in.", delay: 17500 },
+  { text: "Backpropagation is the algorithm we use to compute gradients and update weights during training.", delay: 21000 },
+  { text: "I want you to review the backpropagation derivation from Chapter 4 before next class.", delay: 24500 },
+  { text: "The gradient descent algorithm minimizes the loss function by stepping in the direction of steepest descent.", delay: 28000 },
+  { text: "Your midterm exam will cover everything through backpropagation — that's chapters 3 and 4.", delay: 31500 },
+  { text: "The assignment on implementing a two-layer perceptron is due this Friday at 11:59 PM.", delay: 35000 },
+  { text: "For extra credit, you can implement dropout regularization — submit via the course portal.", delay: 38500 },
+  { text: "Dropout is a regularization technique that randomly deactivates neurons during training to prevent overfitting.", delay: 42000 },
+  { text: "Remember: overfitting is when your model performs well on training data but poorly on unseen data.", delay: 45500 },
+];
+
+const sidebarItems = [
+  { type: 'concept', text: 'Perceptron', quote: '"the fundamental building block of any neural network"', confidence: 0.91, afterLine: 2 },
+  { type: 'concept', text: 'Activation function (sigmoid, ReLU, tanh)', quote: '"determines whether a neuron fires"', confidence: 0.87, afterLine: 4 },
+  { type: 'concept', text: 'Backpropagation', quote: '"algorithm to compute gradients and update weights during training"', confidence: 0.94, afterLine: 6 },
+  { type: 'action', text: 'Review backpropagation derivation — Chapter 4', quote: '"before next class"', confidence: 0.96, afterLine: 7 },
+  { type: 'concept', text: 'Gradient descent & loss minimization', quote: '"stepping in the direction of steepest descent"', confidence: 0.85, afterLine: 8 },
+  { type: 'action', text: 'Midterm covers chapters 3 & 4', quote: '"everything through backpropagation"', confidence: 0.98, afterLine: 9 },
+  { type: 'action', text: 'Perceptron assignment due Friday 11:59 PM', quote: '"implementing a two-layer perceptron"', confidence: 0.99, afterLine: 10 },
+  { type: 'concept', text: 'Dropout regularization', quote: '"randomly deactivates neurons during training"', confidence: 0.88, afterLine: 12 },
+  { type: 'concept', text: 'Overfitting', quote: '"performs well on training data but poorly on unseen data"', confidence: 0.90, afterLine: 13 },
+];
+
+let timers = [];
+let lineCount = 0;
+let sidebarCount = 0;
+let actionCount = 0;
+let conceptCount = 0;
+let fullText = '';
+let elapsed = 0;
+let timerInterval = null;
+
+function setStep(n) {
+  document.querySelectorAll('.nav-step').forEach((s,i) => s.classList.toggle('active', i===n-1));
+  document.querySelectorAll('.screen').forEach((s,i) => s.classList.toggle('active', i===n-1));
+}
+
+function startSession() {
+  document.getElementById('recDot').classList.remove('off');
+  setStep(2);
+  lineCount = 0; sidebarCount = 0; actionCount = 0; conceptCount = 0; fullText = '';
+  document.getElementById('transcriptBody').innerHTML = '';
+  document.getElementById('sidebarBody').innerHTML = '';
+  document.getElementById('itemCount').textContent = '0 items';
+  elapsed = 0;
+  timerInterval = setInterval(() => {
+    elapsed++;
+    const m = Math.floor(elapsed/60), s = elapsed%60;
+    document.getElementById('timeCounter').textContent = m+':'+(s<10?'0':'')+s;
+  }, 1000);
+
+  lectureData.forEach((line, i) => {
+    const t = setTimeout(() => addTranscriptLine(line.text, i), line.delay);
+    timers.push(t);
+  });
+  sidebarItems.forEach(item => {
+    const trigger = lectureData[item.afterLine];
+    if (!trigger) return;
+    const t = setTimeout(() => addSidebarItem(item), trigger.delay + 1800);
+    timers.push(t);
+  });
+}
+
+function addTranscriptLine(text, index) {
+  lineCount++;
+  fullText += text + ' ';
+  const body = document.getElementById('transcriptBody');
+  const div = document.createElement('div');
+  div.className = 'transcript-line current';
+  div.textContent = text;
+  if (index > 0) {
+    const prev = body.lastElementChild;
+    if (prev) prev.classList.remove('current');
+  }
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+}
+
+function addSidebarItem(item) {
+  const body = document.getElementById('sidebarBody');
+  const div = document.createElement('div');
+  div.className = 'sidebar-item ' + item.type;
+  const label = item.type === 'action' ? 'Action item' : 'Key concept';
+  const dotClass = item.type === 'action' ? 'red' : 'blue';
+  const pct = Math.round(item.confidence * 100);
+  div.innerHTML = `
+    <div class="tag"><div class="tag-dot ${dotClass}"></div>${label}</div>
+    <div class="item-text">${item.text}</div>
+    <div class="confidence-bar"><div class="confidence-fill" style="width:0%" data-w="${pct}%"></div></div>
+    <div class="source-quote">"${item.quote}"</div>`;
+  body.prepend(div);
+  body.scrollTop = 0;
+
+  if (item.type === 'action') actionCount++;
+  else conceptCount++;
+  sidebarCount++;
+  document.getElementById('itemCount').textContent = sidebarCount + (sidebarCount===1?' item':' items');
+
+  requestAnimationFrame(() => {
+    const fill = div.querySelector('.confidence-fill');
+    if (fill) fill.style.width = fill.dataset.w;
+  });
+}
+
+function endSession() {
+  timers.forEach(clearTimeout);
+  timers = [];
+  clearInterval(timerInterval);
+  document.getElementById('recDot').classList.add('off');
+
+  document.getElementById('finalActions').textContent = actionCount;
+  document.getElementById('finalConcepts').textContent = conceptCount;
+  document.getElementById('fullTranscript').textContent = fullText || lectureData.map(l=>l.text).join(' ');
+
+  const actions = sidebarItems.filter(i=>i.type==='action');
+  const concepts = sidebarItems.filter(i=>i.type==='concept');
+
+  const grid = document.getElementById('summaryGrid');
+  grid.innerHTML = `
+    <div class="sum-panel">
+      <div class="sum-header"><div class="tag-dot red"></div>Action items (${actions.length})</div>
+      <div class="sum-body">${actions.map(a=>`<div class="sum-item"><div class="sum-dot red"></div><div>${a.text}</div></div>`).join('')}</div>
+    </div>
+    <div class="sum-panel">
+      <div class="sum-header"><div class="tag-dot blue"></div>Key concepts (${concepts.length})</div>
+      <div class="sum-body">${concepts.map(c=>`<div class="sum-item"><div class="sum-dot blue"></div><div>${c.text}</div></div>`).join('')}</div>
+    </div>`;
+
+  setStep(3);
+}
+
+function restart() {
+  timers.forEach(clearTimeout);
+  clearInterval(timerInterval);
+  document.getElementById('recDot').classList.add('off');
+  lineCount = 0; sidebarCount = 0; actionCount = 0; conceptCount = 0; fullText = '';
+  elapsed = 0;
+  setStep(1);
+}
+</script>

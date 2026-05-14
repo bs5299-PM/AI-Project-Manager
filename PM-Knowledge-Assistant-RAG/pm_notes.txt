@@ -1,0 +1,37 @@
+Project: PM Knowledge Base
+Role: Technical Project Manager at TOS Advisors
+
+PRD (Product Requirements Document):
+- A PRD defines the purpose, features, and requirements of a product
+- It is used to align stakeholders before development begins
+- Key sections: Overview, Goals, User Stories, Acceptance Criteria, Timeline
+- Owned by the Product Manager and reviewed by Engineering and Design
+
+Key Responsibilities:
+- Manage Agile delivery across 4 fintech platforms
+- Lead sprint planning and backlog refinement
+- Resolve blockers within 48 hours
+- Build Asana dashboards for leadership visibility
+
+Key Milestones:
+- Sprint 1: Platform integration - Complete
+- Sprint 2: Client onboarding - Complete
+- Sprint 3: Dashboard deployment - In Progress
+- Sprint 4: Final delivery - Planned
+
+Risks:
+- Client scope changes mid-sprint
+- Resource availability constraints
+- Stakeholder alignment delays
+
+Team Members:
+- Engineering team
+- Operations team
+- Client success team
+- Executive leadership
+
+Tools Used:
+- Asana for project tracking
+- Jira for issue management
+- Confluence for documentation
+- Slack for communication

@@ -1,31 +1,44 @@
 # 🎙️ LectureLens AI
 
-LectureLens AI is an AI-assisted lecture companion designed to help students with ADHD and hearing impairments by converting raw lecture audio into structured learning insights in real time.
+LectureLens AI is a real-time AI system that converts live lecture audio into structured learning insights for students with ADHD and hearing impairments.
 
-It transcribes lectures and extracts **Action Items** and **Key Concepts**, helping students focus on understanding instead of manual note-taking.
+Instead of manually taking notes while trying to listen, students receive **automatically extracted Action Items and Key Concepts in real time**, allowing them to focus on understanding rather than transcription.
+
+---
+
+## 🚨 Problem
+
+Students often struggle to balance listening and note-taking during lectures, resulting in:
+- Missed deadlines and assignments
+- Incomplete understanding of key concepts
+- Cognitive overload during fast-paced lectures
+
+LectureLens is designed to reduce this cognitive load by acting as a real-time AI note-taking layer.
 
 ---
 
 ## 🚀 Features
 
-- 🎤 Record lecture audio directly in the browser
-- 📝 Whisper-based speech-to-text transcription
-- 🧠 GPT-4o-mini extracts structured insights:
-  - Action Items (assignments, deadlines)
-  - Key Concepts (definitions, frameworks)
-- 📚 Streamlit UI for clean visualization of insights
+- 🎤 Browser-based lecture audio recording
+- 📝 Whisper-powered speech-to-text transcription
+- 🧠 GPT-4o-mini structured extraction:
+  - Action Items (tasks, deadlines, assignments)
+  - Key Concepts (definitions, frameworks, ideas)
+- 📚 Streamlit-based real-time UI for insights visualization
 
 ---
 
-## 🧠 How It Works
+## 🧠 System Design
 
-1. User records lecture audio
-2. Audio is sent to OpenAI Whisper for transcription
-3. Transcript is passed to GPT-4o-mini
-4. Model extracts structured JSON output:
+LectureLens operates as a real-time AI pipeline:
+
+1. Audio is captured from the browser microphone
+2. Audio is transcribed using OpenAI Whisper
+3. Transcript is sent to GPT-4o-mini
+4. LLM extracts structured JSON output:
    - Action Items
    - Key Concepts
-5. Streamlit displays results in UI
+5. Streamlit renders structured insights in the UI
 
 ---
 
@@ -41,25 +54,24 @@ It transcribes lectures and extracts **Action Items** and **Key Concepts**, help
 
 ## 📸 Demo
 
-https://www.loom.com/share/35d680d3aff04be78001c16854e56ec6
-
+🔗 https://www.loom.com/share/35d680d3aff04be78001c16854e56ec6
 
 ---
 
 ## 🧪 Example Output
 
-**Action Items**
+### 🔴 Action Items
 - Submit Assignment 2 by Friday
 - Prepare Chapter 3 notes
 
-**Key Concepts**
+### 🔵 Key Concepts
 - Gradient Descent
 - Neural Networks
 - Backpropagation
 
 ---
 
-## 📦 Installation
+## 📦 Run Locally
 
 ```bash
 git clone https://github.com/your-username/lecturelens-ai.git

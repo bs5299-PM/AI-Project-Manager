@@ -55,6 +55,8 @@ LectureLens operates as a real-time AI pipeline:
 ## 📸 Demo
 
 🔗 https://www.loom.com/share/35d680d3aff04be78001c16854e56ec6
+<img width="720" height="430" alt="lecturelens_demo_short" src="https://github.com/user-attachments/assets/1c09ba33-eec2-4ba7-99b9-133dce580c35" />
+
 
 ---
 

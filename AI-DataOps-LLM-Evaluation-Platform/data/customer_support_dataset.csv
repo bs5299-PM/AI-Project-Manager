@@ -1,0 +1,21 @@
+sample_id,customer_message
+1,I forgot my password.
+2,I was charged twice for my subscription.
+3,Where is my order?
+4,I want to cancel my subscription.
+5,My payment failed during checkout.
+6,I can't log into my account.
+7,My account was locked unexpectedly.
+8,I received the wrong product.
+9,I want to update my billing address.
+10,I haven't received my refund yet.
+11,How do I change my email address?
+12,The mobile app keeps crashing.
+13,My coupon code isn't working.
+14,I accidentally placed two orders.
+15,I want to upgrade my subscription plan.
+16,My package arrived damaged.
+17,I can't download my invoice.
+18,Someone else accessed my account.
+19,How do I delete my account permanently?
+20,I need to speak to a human agent.

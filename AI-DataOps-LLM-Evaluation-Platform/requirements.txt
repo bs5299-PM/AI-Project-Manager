@@ -1,0 +1,9 @@
+streamlit
+pandas
+openai
+deepeval==4.1.5
+transformers
+datasets
+torch
+accelerate
+sentencepiece

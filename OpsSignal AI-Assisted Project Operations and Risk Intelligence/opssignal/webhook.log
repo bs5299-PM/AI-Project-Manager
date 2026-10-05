@@ -1,0 +1,279 @@
+2026-10-04 12:30:55  REJECTED (no signature) from 127.0.0.1
+2026-10-04 12:30:55  REJECTED (bad signature) from 127.0.0.1
+2026-10-04 12:30:55  REJECTED (timestamp missing or older than 60s) type=Issue
+2026-10-04 12:30:55  EVENT Issue update TOS-5
+2026-10-04 12:30:55    sync started (Issue/update)
+2026-10-04 12:30:55    sync finished: 1 projects, 5 issues, 0 change(s) recorded
+2026-10-04 12:30:55  EVENT Comment update TOS-5
+2026-10-04 12:30:55    no handler for type Comment; ignored
+2026-10-04 12:34:04  LINEAR_WEBHOOK_SECRET is empty: every event will be rejected until it is set.
+2026-10-04 12:38:02  LINEAR_WEBHOOK_SECRET is empty: every event will be rejected until it is set.
+2026-10-04 12:45:09  REJECTED (no signature) from 127.0.0.1
+2026-10-04 12:45:53  REJECTED (no signature) from 127.0.0.1
+2026-10-04 12:55:05  EVENT Issue update TOS-5
+2026-10-04 12:55:05    sync started (Issue/update)
+2026-10-04 12:55:06    sync finished: 1 projects, 5 issues, 1 change(s) recorded
+2026-10-04 16:23:46  REJECTED Slack events request (bad or missing signature)
+2026-10-04 16:23:46  REJECTED Slack events request (bad or missing signature)
+2026-10-04 16:23:46  REJECTED Slack events request (bad or missing signature)
+2026-10-04 16:23:46  REJECTED Slack interactive request (bad or missing signature)
+2026-10-04 16:23:46  SLACK message ignored: channel C999 is not approved
+2026-10-04 16:23:46  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 delivery is moving from Oct 10 to Oct 17'
+2026-10-04 16:23:46    candidates: ['TOS-5']
+2026-10-04 16:23:46    Claude answered: {"outcome": "proposal", "identifier": "TOS-5", "field": "due_date", "new_value": "2026-10-17", "reason": "clear"}
+2026-10-04 16:23:46    after checks: proposal Proposal(issue_id=1, identifier='TOS-5', title='Hardware V2 deliver', field='due_date', old_value='2026-10-10', new_value='2026-10-17')
+2026-10-04 16:23:46    approval #1 saved as pending; card posted
+2026-10-04 16:23:46  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 delivery is moving from Oct 10 to Oct 17'
+2026-10-04 16:23:46    candidates: ['TOS-5']
+2026-10-04 16:23:46    Claude answered: {"outcome": "proposal", "identifier": "TOS-5", "field": "due_date", "new_value": "2026-10-17", "reason": "clear"}
+2026-10-04 16:23:46    after checks: proposal Proposal(issue_id=1, identifier='TOS-5', title='Hardware V2 deliver', field='due_date', old_value='2026-10-10', new_value='2026-10-17')
+2026-10-04 16:23:46    approval #2 saved as pending; card posted
+2026-10-04 16:23:46  SLACK retry ignored (already handled): E1-retry
+2026-10-04 16:23:46  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 is delayed'
+2026-10-04 16:23:46    candidates: ['TOS-5']
+2026-10-04 16:23:46    Claude answered: {"outcome": "not_sure", "reason": "no date given"}
+2026-10-04 16:23:46    after checks: not sure (no date given)
+2026-10-04 16:23:46    approval #3 saved as needs_clarification; card posted
+2026-10-04 16:23:46  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 delivery to Oct 17'
+2026-10-04 16:23:46    candidates: ['TOS-5']
+2026-10-04 16:23:46    Claude answered: {"outcome": "proposal", "identifier": "TOS-99", "field": "due_date", "new_value": "2026-10-17", "reason": "made up"}
+2026-10-04 16:23:46    after checks: not sure (Claude named an issue that is not among the matching issues)
+2026-10-04 16:23:46    approval #4 saved as needs_clarification; card posted
+2026-10-04 16:23:46  SLACK MESSAGE channel=C123 user=UME text='Weather looks great today'
+2026-10-04 16:23:46    candidates: none
+2026-10-04 16:23:46    approval #5 saved as needs_clarification; card posted
+2026-10-04 16:23:46  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 is done'
+2026-10-04 16:23:46    candidates: ['TOS-5']
+2026-10-04 16:23:46    Claude answered: {"outcome": "proposal", "identifier": "TOS-5", "field": "status", "new_value": "Done", "reason": "status"}
+2026-10-04 16:23:46    after checks: not sure (Slack can only change due_date or priority)
+2026-10-04 16:23:46    approval #6 saved as needs_clarification; card posted
+2026-10-04 16:23:46  SLACK CLICK approval_confirm on approval #1 by bindu (UOTHER)
+2026-10-04 16:23:46    refused: UOTHER is not an approver
+2026-10-04 16:23:46  SLACK CLICK approval_confirm on approval #1 by bindu (UME)
+2026-10-04 16:23:46    result: confirmed 
+2026-10-04 16:23:46  SLACK CLICK approval_confirm on approval #1 by bindu (UME)
+2026-10-04 16:23:46    result: already_decided 
+2026-10-04 16:23:46  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 delivery is now urgent'
+2026-10-04 16:23:46    candidates: ['TOS-5']
+2026-10-04 16:23:46    Claude answered: {"outcome": "proposal", "identifier": "TOS-5", "field": "priority", "new_value": "Urgent", "reason": "clear"}
+2026-10-04 16:23:46    after checks: proposal Proposal(issue_id=1, identifier='TOS-5', title='Hardware V2 deliver', field='priority', old_value='Medium', new_value='Urgent')
+2026-10-04 16:23:46    approval #7 saved as pending; card posted
+2026-10-04 16:23:46  SLACK CLICK approval_reject on approval #7 by bindu (UME)
+2026-10-04 16:23:46    result: rejected 
+2026-10-04 16:23:46  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 delivery is now high'
+2026-10-04 16:23:46    candidates: ['TOS-5']
+2026-10-04 16:23:46    Claude answered: {"outcome": "proposal", "identifier": "TOS-5", "field": "priority", "new_value": "Urgent", "reason": "clear"}
+2026-10-04 16:23:46    after checks: proposal Proposal(issue_id=1, identifier='TOS-5', title='Hardware V2 deliver', field='priority', old_value='Medium', new_value='Urgent')
+2026-10-04 16:23:46    approval #8 saved as pending; card posted
+2026-10-04 16:23:46  SLACK CLICK approval_confirm on approval #8 by bindu (UME)
+2026-10-04 16:23:46    result: stale Linear now shows Low
+2026-10-04 16:23:53  SLACK_ALLOWED_CHANNELS is empty: no Slack message will be processed.
+2026-10-04 16:23:53  SLACK_APPROVER_IDS is empty: nobody can Confirm or Reject.
+2026-10-04 16:23:53  REJECTED (no signature) from 127.0.0.1
+2026-10-04 16:23:53  REJECTED (bad signature) from 127.0.0.1
+2026-10-04 16:23:53  REJECTED (timestamp missing or older than 60s) type=Issue
+2026-10-04 16:23:53  EVENT Issue update TOS-5
+2026-10-04 16:23:53    sync started (Issue/update)
+2026-10-04 16:23:53    sync finished: 1 projects, 5 issues, 0 change(s) recorded
+2026-10-04 16:23:53  EVENT Comment update TOS-5
+2026-10-04 16:23:53    no handler for type Comment; ignored
+2026-10-04 16:33:41  SLACK_APPROVER_IDS is empty: nobody can Confirm or Reject.
+2026-10-04 16:36:06  SLACK_APPROVER_IDS is empty: nobody can Confirm or Reject.
+2026-10-04 17:02:12  REJECTED Slack events request (bad or missing signature)
+2026-10-04 17:35:21  SLACK message ignored: channel C0C6PDNGM4Z is not approved
+2026-10-04 17:38:11  SLACK MESSAGE channel=C0C6PDNGM4Z user=U0C6G6GETB7 text='Hardware V2 delivery is moving to October 24'
+2026-10-04 17:38:11    candidates: ['TOS-5']
+2026-10-04 17:38:20    Claude call FAILED: ANTHROPIC_API_KEY is missing or empty in .env
+2026-10-04 17:38:21    approval #1 saved as needs_clarification; card posted
+2026-10-04 17:45:41  SLACK MESSAGE channel=C0C6PDNGM4Z user=U0C6G6GETB7 text='Hardware V2 delivery is moving to October 24'
+2026-10-04 17:45:41    candidates: ['TOS-5']
+2026-10-04 17:45:46    Claude call FAILED: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'tool_choice: type "tool" and "any" are not supported for this model.'}, 'request_id': 'req_011Cfi1TVs5h1zdezYKGj6yf'}
+2026-10-04 17:45:47    approval #2 saved as needs_clarification; card posted
+2026-10-04 17:47:49  REJECTED Slack events request (bad or missing signature)
+2026-10-04 17:47:49  REJECTED Slack events request (bad or missing signature)
+2026-10-04 17:47:49  REJECTED Slack events request (bad or missing signature)
+2026-10-04 17:47:49  REJECTED Slack interactive request (bad or missing signature)
+2026-10-04 17:47:49  SLACK message ignored: channel C999 is not approved
+2026-10-04 17:47:49  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 delivery is moving from Oct 10 to Oct 17'
+2026-10-04 17:47:49    candidates: ['TOS-5']
+2026-10-04 17:47:49    Claude answered: {"outcome": "proposal", "identifier": "TOS-5", "field": "due_date", "new_value": "2026-10-17", "reason": "clear"}
+2026-10-04 17:47:49    after checks: proposal Proposal(issue_id=1, identifier='TOS-5', title='Hardware V2 deliver', field='due_date', old_value='2026-10-10', new_value='2026-10-17')
+2026-10-04 17:47:49    approval #1 saved as pending; card posted
+2026-10-04 17:47:49  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 delivery is moving from Oct 10 to Oct 17'
+2026-10-04 17:47:49    candidates: ['TOS-5']
+2026-10-04 17:47:49    Claude answered: {"outcome": "proposal", "identifier": "TOS-5", "field": "due_date", "new_value": "2026-10-17", "reason": "clear"}
+2026-10-04 17:47:49    after checks: proposal Proposal(issue_id=1, identifier='TOS-5', title='Hardware V2 deliver', field='due_date', old_value='2026-10-10', new_value='2026-10-17')
+2026-10-04 17:47:49    approval #2 saved as pending; card posted
+2026-10-04 17:47:49  SLACK retry ignored (already handled): E1-retry
+2026-10-04 17:47:49  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 is delayed'
+2026-10-04 17:47:49    candidates: ['TOS-5']
+2026-10-04 17:47:49    Claude answered: {"outcome": "not_sure", "reason": "no date given"}
+2026-10-04 17:47:49    after checks: not sure (no date given)
+2026-10-04 17:47:49    approval #3 saved as needs_clarification; card posted
+2026-10-04 17:47:49  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 delivery to Oct 17'
+2026-10-04 17:47:49    candidates: ['TOS-5']
+2026-10-04 17:47:49    Claude answered: {"outcome": "proposal", "identifier": "TOS-99", "field": "due_date", "new_value": "2026-10-17", "reason": "made up"}
+2026-10-04 17:47:49    after checks: not sure (Claude named an issue that is not among the matching issues)
+2026-10-04 17:47:49    approval #4 saved as needs_clarification; card posted
+2026-10-04 17:47:49  SLACK MESSAGE channel=C123 user=UME text='Weather looks great today'
+2026-10-04 17:47:49    candidates: none
+2026-10-04 17:47:49    approval #5 saved as needs_clarification; card posted
+2026-10-04 17:47:49  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 is done'
+2026-10-04 17:47:49    candidates: ['TOS-5']
+2026-10-04 17:47:49    Claude answered: {"outcome": "proposal", "identifier": "TOS-5", "field": "status", "new_value": "Done", "reason": "status"}
+2026-10-04 17:47:49    after checks: not sure (Slack can only change due_date or priority)
+2026-10-04 17:47:49    approval #6 saved as needs_clarification; card posted
+2026-10-04 17:47:49  SLACK CLICK approval_confirm on approval #1 by bindu (UOTHER)
+2026-10-04 17:47:49    refused: UOTHER is not an approver
+2026-10-04 17:47:49  SLACK CLICK approval_confirm on approval #1 by bindu (UME)
+2026-10-04 17:47:49    result: confirmed 
+2026-10-04 17:47:49  SLACK CLICK approval_confirm on approval #1 by bindu (UME)
+2026-10-04 17:47:49    result: already_decided 
+2026-10-04 17:47:49  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 delivery is now urgent'
+2026-10-04 17:47:49    candidates: ['TOS-5']
+2026-10-04 17:47:49    Claude answered: {"outcome": "proposal", "identifier": "TOS-5", "field": "priority", "new_value": "Urgent", "reason": "clear"}
+2026-10-04 17:47:49    after checks: proposal Proposal(issue_id=1, identifier='TOS-5', title='Hardware V2 deliver', field='priority', old_value='Medium', new_value='Urgent')
+2026-10-04 17:47:49    approval #7 saved as pending; card posted
+2026-10-04 17:47:49  SLACK CLICK approval_reject on approval #7 by bindu (UME)
+2026-10-04 17:47:49    result: rejected 
+2026-10-04 17:47:49  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 delivery is now high'
+2026-10-04 17:47:49    candidates: ['TOS-5']
+2026-10-04 17:47:49    Claude answered: {"outcome": "proposal", "identifier": "TOS-5", "field": "priority", "new_value": "Urgent", "reason": "clear"}
+2026-10-04 17:47:49    after checks: proposal Proposal(issue_id=1, identifier='TOS-5', title='Hardware V2 deliver', field='priority', old_value='Medium', new_value='Urgent')
+2026-10-04 17:47:49    approval #8 saved as pending; card posted
+2026-10-04 17:47:49  SLACK CLICK approval_confirm on approval #8 by bindu (UME)
+2026-10-04 17:47:49    result: stale Linear now shows Low
+2026-10-04 17:48:25  SLACK MESSAGE channel=C0C6PDNGM4Z user=U0C6G6GETB7 text='Hardware V2 delivery is moving to October 24'
+2026-10-04 17:48:25    candidates: ['TOS-5']
+2026-10-04 17:48:32    Claude answered: {"outcome": "proposal", "identifier": "TOS-5", "field": "due_date", "new_value": "2026-10-24", "reason": "Message says Hardware V2 delivery is moving to October 24, matching TOS-5's due date (year inferred from today's date)."}
+2026-10-04 17:48:32    after checks: proposal Proposal(issue_id=1, identifier='TOS-5', title='Hardware V2 deliver', field='due_date', old_value='2026-10-17', new_value='2026-10-24')
+2026-10-04 17:48:33    approval #3 saved as pending; card posted
+2026-10-04 17:49:12  SLACK CLICK approval_confirm on approval #3 by bindu.iambest.singh (U0C6G6GETB7)
+2026-10-04 17:49:13    result: confirmed 
+2026-10-04 17:49:14  EVENT Issue update TOS-5
+2026-10-04 17:49:14    sync started (Issue/update)
+2026-10-04 17:49:15    sync finished: 1 projects, 5 issues, 0 change(s) recorded
+2026-10-04 19:41:57  REJECTED Slack events request (bad or missing signature)
+2026-10-04 19:41:57  REJECTED Slack events request (bad or missing signature)
+2026-10-04 19:41:57  REJECTED Slack events request (bad or missing signature)
+2026-10-04 19:41:57  REJECTED Slack interactive request (bad or missing signature)
+2026-10-04 19:41:57  SLACK message ignored: channel C999 is not approved
+2026-10-04 19:41:57  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 delivery is moving from Oct 10 to Oct 17'
+2026-10-04 19:41:57    candidates: ['TOS-5']
+2026-10-04 19:41:57    Claude answered: {"outcome": "proposal", "identifier": "TOS-5", "field": "due_date", "new_value": "2026-10-17", "reason": "clear"}
+2026-10-04 19:41:57    after checks: proposal Proposal(issue_id=1, identifier='TOS-5', title='Hardware V2 deliver', field='due_date', old_value='2026-10-10', new_value='2026-10-17')
+2026-10-04 19:41:57    approval #1 saved as pending; card posted
+2026-10-04 19:41:57  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 delivery is moving from Oct 10 to Oct 17'
+2026-10-04 19:41:57    candidates: ['TOS-5']
+2026-10-04 19:41:57    Claude answered: {"outcome": "proposal", "identifier": "TOS-5", "field": "due_date", "new_value": "2026-10-17", "reason": "clear"}
+2026-10-04 19:41:57    after checks: proposal Proposal(issue_id=1, identifier='TOS-5', title='Hardware V2 deliver', field='due_date', old_value='2026-10-10', new_value='2026-10-17')
+2026-10-04 19:41:57    approval #2 saved as pending; card posted
+2026-10-04 19:41:57  SLACK retry ignored (already handled): E1-retry
+2026-10-04 19:41:57  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 is delayed'
+2026-10-04 19:41:57    candidates: ['TOS-5']
+2026-10-04 19:41:57    Claude answered: {"outcome": "not_sure", "reason": "no date given"}
+2026-10-04 19:41:57    after checks: not sure (no date given)
+2026-10-04 19:41:57    approval #3 saved as needs_clarification; card posted
+2026-10-04 19:41:57  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 delivery to Oct 17'
+2026-10-04 19:41:57    candidates: ['TOS-5']
+2026-10-04 19:41:57    Claude answered: {"outcome": "proposal", "identifier": "TOS-99", "field": "due_date", "new_value": "2026-10-17", "reason": "made up"}
+2026-10-04 19:41:57    after checks: not sure (Claude named an issue that is not among the matching issues)
+2026-10-04 19:41:57    approval #4 saved as needs_clarification; card posted
+2026-10-04 19:41:57  SLACK MESSAGE channel=C123 user=UME text='Weather looks great today'
+2026-10-04 19:41:57    candidates: none
+2026-10-04 19:41:57    approval #5 saved as needs_clarification; card posted
+2026-10-04 19:41:57  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 is done'
+2026-10-04 19:41:57    candidates: ['TOS-5']
+2026-10-04 19:41:57    Claude answered: {"outcome": "proposal", "identifier": "TOS-5", "field": "status", "new_value": "Done", "reason": "status"}
+2026-10-04 19:41:57    after checks: not sure (Slack can only change due_date or priority)
+2026-10-04 19:41:57    approval #6 saved as needs_clarification; card posted
+2026-10-04 19:41:57  SLACK CLICK approval_confirm on approval #1 by bindu (UOTHER)
+2026-10-04 19:41:57    refused: UOTHER is not an approver
+2026-10-04 19:41:57  SLACK CLICK approval_confirm on approval #1 by bindu (UME)
+2026-10-04 19:41:57    result: confirmed 
+2026-10-04 19:41:57  SLACK CLICK approval_confirm on approval #1 by bindu (UME)
+2026-10-04 19:41:57    result: already_decided 
+2026-10-04 19:41:57  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 delivery is now urgent'
+2026-10-04 19:41:57    candidates: ['TOS-5']
+2026-10-04 19:41:57    Claude answered: {"outcome": "proposal", "identifier": "TOS-5", "field": "priority", "new_value": "Urgent", "reason": "clear"}
+2026-10-04 19:41:57    after checks: proposal Proposal(issue_id=1, identifier='TOS-5', title='Hardware V2 deliver', field='priority', old_value='Medium', new_value='Urgent')
+2026-10-04 19:41:57    approval #7 saved as pending; card posted
+2026-10-04 19:41:57  SLACK CLICK approval_reject on approval #7 by bindu (UME)
+2026-10-04 19:41:57    result: rejected 
+2026-10-04 19:41:57  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 delivery is now high'
+2026-10-04 19:41:57    candidates: ['TOS-5']
+2026-10-04 19:41:57    Claude answered: {"outcome": "proposal", "identifier": "TOS-5", "field": "priority", "new_value": "Urgent", "reason": "clear"}
+2026-10-04 19:41:57    after checks: proposal Proposal(issue_id=1, identifier='TOS-5', title='Hardware V2 deliver', field='priority', old_value='Medium', new_value='Urgent')
+2026-10-04 19:41:57    approval #8 saved as pending; card posted
+2026-10-04 19:41:57  SLACK CLICK approval_confirm on approval #8 by bindu (UME)
+2026-10-04 19:41:57    result: stale Linear now shows Low
+2026-10-04 19:41:59  REJECTED (no signature) from 127.0.0.1
+2026-10-04 19:41:59  REJECTED (bad signature) from 127.0.0.1
+2026-10-04 19:41:59  REJECTED (timestamp missing or older than 60s) type=Issue
+2026-10-04 19:41:59  EVENT Issue update TOS-5
+2026-10-04 19:41:59    sync started (Issue/update)
+2026-10-04 19:41:59    sync finished: 1 projects, 5 issues, 0 change(s) recorded
+2026-10-04 19:41:59  EVENT Comment update TOS-5
+2026-10-04 19:41:59    no handler for type Comment; ignored
+2026-10-04 20:25:43  REJECTED Slack events request (bad or missing signature)
+2026-10-04 20:25:43  REJECTED Slack events request (bad or missing signature)
+2026-10-04 20:25:43  REJECTED Slack events request (bad or missing signature)
+2026-10-04 20:25:43  REJECTED Slack interactive request (bad or missing signature)
+2026-10-04 20:25:43  SLACK message ignored: channel C999 is not approved
+2026-10-04 20:25:43  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 delivery is moving from Oct 10 to Oct 17'
+2026-10-04 20:25:43    candidates: ['TOS-5']
+2026-10-04 20:25:43    Claude answered: {"outcome": "proposal", "identifier": "TOS-5", "field": "due_date", "new_value": "2026-10-17", "reason": "clear"}
+2026-10-04 20:25:43    after checks: proposal Proposal(issue_id=1, identifier='TOS-5', title='Hardware V2 deliver', field='due_date', old_value='2026-10-10', new_value='2026-10-17')
+2026-10-04 20:25:43    approval #1 saved as pending; card posted
+2026-10-04 20:25:43  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 delivery is moving from Oct 10 to Oct 17'
+2026-10-04 20:25:43    candidates: ['TOS-5']
+2026-10-04 20:25:43    Claude answered: {"outcome": "proposal", "identifier": "TOS-5", "field": "due_date", "new_value": "2026-10-17", "reason": "clear"}
+2026-10-04 20:25:43    after checks: proposal Proposal(issue_id=1, identifier='TOS-5', title='Hardware V2 deliver', field='due_date', old_value='2026-10-10', new_value='2026-10-17')
+2026-10-04 20:25:43    approval #2 saved as pending; card posted
+2026-10-04 20:25:43  SLACK retry ignored (already handled): E1-retry
+2026-10-04 20:25:43  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 is delayed'
+2026-10-04 20:25:43    candidates: ['TOS-5']
+2026-10-04 20:25:43    Claude answered: {"outcome": "not_sure", "reason": "no date given"}
+2026-10-04 20:25:43    after checks: not sure (no date given)
+2026-10-04 20:25:43    approval #3 saved as needs_clarification; card posted
+2026-10-04 20:25:43  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 delivery to Oct 17'
+2026-10-04 20:25:43    candidates: ['TOS-5']
+2026-10-04 20:25:43    Claude answered: {"outcome": "proposal", "identifier": "TOS-99", "field": "due_date", "new_value": "2026-10-17", "reason": "made up"}
+2026-10-04 20:25:43    after checks: not sure (Claude named an issue that is not among the matching issues)
+2026-10-04 20:25:43    approval #4 saved as needs_clarification; card posted
+2026-10-04 20:25:43  SLACK MESSAGE channel=C123 user=UME text='Weather looks great today'
+2026-10-04 20:25:43    candidates: none
+2026-10-04 20:25:43    approval #5 saved as needs_clarification; card posted
+2026-10-04 20:25:43  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 is done'
+2026-10-04 20:25:43    candidates: ['TOS-5']
+2026-10-04 20:25:43    Claude answered: {"outcome": "proposal", "identifier": "TOS-5", "field": "status", "new_value": "Done", "reason": "status"}
+2026-10-04 20:25:43    after checks: not sure (Slack can only change due_date or priority)
+2026-10-04 20:25:43    approval #6 saved as needs_clarification; card posted
+2026-10-04 20:25:43  SLACK CLICK approval_confirm on approval #1 by bindu (UOTHER)
+2026-10-04 20:25:43    refused: UOTHER is not an approver
+2026-10-04 20:25:43  SLACK CLICK approval_confirm on approval #1 by bindu (UME)
+2026-10-04 20:25:43    result: confirmed 
+2026-10-04 20:25:43  SLACK CLICK approval_confirm on approval #1 by bindu (UME)
+2026-10-04 20:25:43    result: already_decided 
+2026-10-04 20:25:43  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 delivery is now urgent'
+2026-10-04 20:25:43    candidates: ['TOS-5']
+2026-10-04 20:25:43    Claude answered: {"outcome": "proposal", "identifier": "TOS-5", "field": "priority", "new_value": "Urgent", "reason": "clear"}
+2026-10-04 20:25:43    after checks: proposal Proposal(issue_id=1, identifier='TOS-5', title='Hardware V2 deliver', field='priority', old_value='Medium', new_value='Urgent')
+2026-10-04 20:25:43    approval #7 saved as pending; card posted
+2026-10-04 20:25:43  SLACK CLICK approval_reject on approval #7 by bindu (UME)
+2026-10-04 20:25:43    result: rejected 
+2026-10-04 20:25:43  SLACK MESSAGE channel=C123 user=UME text='Hardware V2 delivery is now high'
+2026-10-04 20:25:43    candidates: ['TOS-5']
+2026-10-04 20:25:43    Claude answered: {"outcome": "proposal", "identifier": "TOS-5", "field": "priority", "new_value": "Urgent", "reason": "clear"}
+2026-10-04 20:25:43    after checks: proposal Proposal(issue_id=1, identifier='TOS-5', title='Hardware V2 deliver', field='priority', old_value='Medium', new_value='Urgent')
+2026-10-04 20:25:43    approval #8 saved as pending; card posted
+2026-10-04 20:25:43  SLACK CLICK approval_confirm on approval #8 by bindu (UME)
+2026-10-04 20:25:43    result: stale Linear now shows Low
+2026-10-04 20:25:44  REJECTED (no signature) from 127.0.0.1
+2026-10-04 20:25:44  REJECTED (bad signature) from 127.0.0.1
+2026-10-04 20:25:44  REJECTED (timestamp missing or older than 60s) type=Issue
+2026-10-04 20:25:44  EVENT Issue update TOS-5
+2026-10-04 20:25:44    sync started (Issue/update)
+2026-10-04 20:25:44    sync finished: 1 projects, 5 issues, 0 change(s) recorded
+2026-10-04 20:25:44  EVENT Comment update TOS-5
+2026-10-04 20:25:44    no handler for type Comment; ignored

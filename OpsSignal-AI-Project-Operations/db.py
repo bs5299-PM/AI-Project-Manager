@@ -72,7 +72,8 @@ CREATE TABLE IF NOT EXISTS risks (
     action_due       TEXT,
     first_seen_at    TEXT NOT NULL,
     opened_at        TEXT NOT NULL,
-    last_seen_at     TEXT NOT NULL,
+    last_alert_at    TEXT NOT NULL,
+    material         TEXT,
     resolved_at      TEXT
 );
 
@@ -107,4 +108,13 @@ def init_db(conn):
     # Databases created before the url column existed get it added (existing rows are kept).
     if "url" not in [r["name"] for r in conn.execute("PRAGMA table_info(projects)")]:
         conn.execute("ALTER TABLE projects ADD COLUMN url TEXT")
+    # Databases created before re-alerting get last_seen_at renamed and the material snapshot column added.
+    cols = [r["name"] for r in conn.execute("PRAGMA table_info(risks)")]
+    if "last_seen_at" in cols:
+        conn.execute("ALTER TABLE risks RENAME COLUMN last_seen_at TO last_alert_at")
+        # The old values were "last seen" times, not alert times; reset them so nothing is re-alerted.
+        conn.execute("""UPDATE risks SET last_alert_at = COALESCE(
+            (SELECT MAX(sent_at) FROM alerts WHERE alerts.risk_id = risks.risk_id AND result = 'sent'), opened_at)""")
+    if "material" not in cols:
+        conn.execute("ALTER TABLE risks ADD COLUMN material TEXT")
     conn.commit()

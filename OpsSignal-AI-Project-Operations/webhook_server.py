@@ -9,12 +9,15 @@ import logging
 import os
 import threading
 import time
+from datetime import date
 
 from dotenv import load_dotenv
 from flask import Flask, jsonify, request
 
 import notion_sync
 import slack_routes
+import digest as digest_module
+from db import get_connection, init_db
 import sync as sync_module
 import webhook_handlers
 from coordination import write_lock
@@ -97,6 +100,13 @@ def signature_is_valid(secret, raw_body, header_value):
     return hmac.compare_digest(expected, header_value.strip())
 
 
+def _cron_authorized():
+    """cron-job.org proves itself with the shared secret header."""
+    expected = os.getenv("CRON_SECRET", "")
+    provided = request.headers.get("X-Cron-Secret", "")
+    return bool(expected) and hmac.compare_digest(provided, expected)
+
+
 def create_app(secret=None, sync_fn=None, slack_blueprint=None, after_sync=None):
     setup_logging()
     if secret is None:
@@ -147,6 +157,49 @@ def create_app(secret=None, sync_fn=None, slack_blueprint=None, after_sync=None)
         if not ran:
             log.info("  no handler for type %s; ignored", event.get("type"))
         return jsonify(status="received"), 200
+
+    @app.post("/digest")
+    def digest_endpoint():
+        if not _cron_authorized():
+            return jsonify(error="unauthorized"), 401
+        week = date.today().isocalendar()
+        week_key = f"{week[0]}-W{week[1]:02d}"
+        conn = get_connection()
+        try:
+            init_db(conn)
+            conn.execute("CREATE TABLE IF NOT EXISTS meta (key TEXT PRIMARY KEY, value TEXT)")
+            row = conn.execute("SELECT value FROM meta WHERE key = 'digest_week'").fetchone()
+            if row and row["value"] == week_key:
+                log.info("DIGEST already sent for %s; skipping", week_key)
+                return jsonify(status="already sent", week=week_key), 200
+            text = digest_module.build_digest(conn)
+            channel = digest_module.send_digest(text)
+            with conn:
+                conn.execute("INSERT OR REPLACE INTO meta (key, value) VALUES ('digest_week', ?)", (week_key,))
+            log.info("DIGEST sent for %s to %s", week_key, channel)
+            return jsonify(status="sent", week=week_key, channel=channel), 200
+        except Exception as exc:
+            log.error("DIGEST FAILED: %s", exc)
+            return jsonify(error=str(exc)), 500
+        finally:
+            conn.close()
+
+    @app.post("/daily-check")
+    def daily_check():
+        if not _cron_authorized():
+            return jsonify(error="unauthorized"), 401
+        try:
+            with write_lock:
+                sync_counts = sync_module.sync()
+                risk_counts = run_risk_check()
+            notion = notion_sync.run_if_configured()
+            log.info("DAILY-CHECK: sync=%s risks=%s notion=%s", sync_counts, risk_counts, notion)
+            return jsonify(status="ok", sync=sync_counts,
+                           risks={k: risk_counts[k] for k in ("open", "new", "reopened", "resolved", "alerts")},
+                           notion=notion), 200
+        except Exception as exc:
+            log.error("DAILY-CHECK FAILED: %s", exc)
+            return jsonify(error=str(exc)), 500
 
     return app
 

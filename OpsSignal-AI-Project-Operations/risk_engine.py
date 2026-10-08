@@ -3,7 +3,7 @@
 Every risk found goes into the risks table and gets exactly one Slack alert (see alerting.py).
 A risk has a stable ID, so running the check again never duplicates it:
   new risk        -> inserted as open, alerted once
-  still true      -> last_seen_at refreshed, no new alert
+  still true      -> last_alert_at refreshed, no new alert
   no longer true  -> marked resolved (no alert)
   true again      -> reopened, alerted once more
 """
@@ -148,19 +148,19 @@ def reconcile(conn, risks, now=None):
             values = [r[f] for f in fields]
             if old is None:
                 conn.execute(
-                    f"""INSERT INTO risks (risk_id, {', '.join(fields)}, status, first_seen_at, opened_at, last_seen_at)
+                    f"""INSERT INTO risks (risk_id, {', '.join(fields)}, status, first_seen_at, opened_at, last_alert_at)
                         VALUES (?, {', '.join('?' for _ in fields)}, 'open', ?, ?, ?)""",
                     [r["risk_id"], *values, now, now, now])
                 counts["new"] += 1
             elif old["status"] == "resolved":
                 conn.execute(
                     f"""UPDATE risks SET {', '.join(f + ' = ?' for f in fields)},
-                        status='open', opened_at=?, last_seen_at=?, resolved_at=NULL WHERE risk_id=?""",
+                        status='open', opened_at=?, last_alert_at=?, resolved_at=NULL WHERE risk_id=?""",
                     [*values, now, now, r["risk_id"]])
                 counts["reopened"] += 1
             else:
                 conn.execute(
-                    f"UPDATE risks SET {', '.join(f + ' = ?' for f in fields)}, last_seen_at=? WHERE risk_id=?",
+                    f"UPDATE risks SET {', '.join(f + ' = ?' for f in fields)}, last_alert_at=? WHERE risk_id=?",
                     [*values, now, r["risk_id"]])
                 counts["persisting"] += 1
         current = {r["risk_id"] for r in risks}

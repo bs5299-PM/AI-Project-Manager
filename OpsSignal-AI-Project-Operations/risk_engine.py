@@ -158,6 +158,7 @@ def reconcile(conn, risks, now=None):
                         status='open', opened_at=?, last_alert_at=?, resolved_at=NULL WHERE risk_id=?""",
                     [*values, now, now, r["risk_id"]])
                 counts["reopened"] += 1
+            else:
     # Unchanged risk: leave last_alert_at alone so it stays silent.
     # Materially changed risk: refresh it so it re-alerts once.
     changed = any(old[f] != r[f] for f in fields)

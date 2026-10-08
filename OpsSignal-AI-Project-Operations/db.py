@@ -1,8 +1,14 @@
-"""Creates the SQLite database and its two tables."""
+"""Creates the SQLite database and its tables."""
+import os
 import sqlite3
 from pathlib import Path
 
-DB_PATH = Path(__file__).parent / "opssignal.db"
+DB_PATH = Path(
+    os.getenv(
+        "OPSSIGNAL_DB_PATH",
+        str(Path(__file__).parent / "opssignal.db")
+    )
+)
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS projects (
